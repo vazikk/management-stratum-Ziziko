@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratum — Everyday Classics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили только для страницы категории */
+        .category-hero {
+            height: 60vh;
+            background: linear-gradient(145deg, var(--black) 20%, var(--gentian-blue) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23C5A572" stroke-width="1"/><circle cx="50" cy="50" r="10" fill="none" stroke="%23C5A572" stroke-width="1"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+        }
+
+        .category-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+
+        .category-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .category-hero-content h1 {
+            font-size: 64px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', 'Didot', serif;
+        }
+
+        .category-hero-content h1 span {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .category-hero-content p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-description {
+            padding: 80px 0;
+            background-color: var(--black);
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .category-description h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-family: 'Times New Roman', serif;
+            color: var(--gold);
+        }
+
+        .category-description p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-tags {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-tag {
+            border: 1px solid var(--gold);
+            padding: 8px 24px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            font-family: 'Helvetica Neue', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .category-products {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+        }
+
+        .category-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .category-product-card {
+            background-color: rgba(255,255,255,0.02);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid rgba(197,165,114,0.15);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-product-card:hover {
+            background-color: rgba(0,51,102,0.2);
+            border-color: var(--gold);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        .category-product-image {
+            width: 100%;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(197,165,114,0.3);
+            padding-bottom: 20px;
+        }
+
+        .category-product-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Helvetica Neue', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .category-product-price {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .category-features {
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .category-features li {
+            color: var(--cream);
+            font-size: 14px;
+            font-family: 'Helvetica Neue', sans-serif;
+            margin-bottom: 8px;
+            list-style-type: none;
+        }
+
+        .category-features li::before {
+            content: '⚜';
+            color: var(--gold);
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            padding: 12px 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        @media (max-width: 1024px) {
+            .category-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .category-products-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-hero-content h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">⚜ STRATUM</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#collections">Коллекции</a></li>
+                    <li><a href="index.html#atelier">Ателье</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="category-hero">
+        <div class="container category-hero-content">
+            <h1>⌚ <span>Everyday Classics</span> ⌚</h1>
+            <p>Уместно всегда и везде. Дизайн, не выходящий из моды. Технологии, делающие жизнь удобнее.</p>
+        </div>
+    </section>
+
+    <section class="category-description">
+        <div class="container">
+            <h2>Стиль на каждый день</h2>
+            <p>Коллекция Everyday Classics — это идеальный баланс между элегантностью и современными технологиями. Часы, которые дополнят любой образ: от делового костюма до casual-одежды. AMOLED-экраны, NFC для оплаты, уведомления и звонки.</p>
+            <div class="category-tags">
+                <span class="category-tag">XIAOMI</span>
+                <span class="category-tag">SAMSUNG</span>
+                <span class="category-tag">HUAWEI</span>
+                <span class="category-tag">AMAZFIT</span>
+                <span class="category-tag">HONOR</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-products">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <div class="section-divider"></div>
+                <h2 class="section-title">Модели Everyday Classics</h2>
+                <p class="section-subtitle">Для тех, кто ценит стиль</p>
+            </div>
+
+            <div class="category-products-grid">
+                <!-- Samsung Galaxy Watch 8 -->
+                <div class="category-product-card">
+                    <img src="https://photo-shop.by/pics/items/20250811190819815_1.jpg" alt="Samsung Galaxy Watch 8" class="category-product-image">
+                    <h3 class="category-product-title">Samsung GW8</h3>
+                    <div class="category-product-price">1 199 BYN</div>
+                    <ul class="category-features">
+                        <li>AMOLED, Always-On Display</li>
+                        <li>NFC оплата, звонки</li>
+                        <li>Google Gemini AI</li>
+                        <li>Дизайн "cushion"</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Huawei Watch Fit 4 Pro -->
+                <div class="category-product-card">
+                    <img src="https://shop.mts.by/upload/resize_cache/iblock/949/qxuw2x85e4imq40hu1o059t7lantay8a/500_926_1/huawei_watch_FIT_4_pro_black_1.jpg" alt="Huawei Watch Fit 4 Pro" class="category-product-image">
+                    <h3 class="category-product-title">Huawei Fit 4 Pro</h3>
+                    <div class="category-product-price">499 BYN</div>
+                    <ul class="category-features">
+                        <li>AMOLED, AOD, титан</li>
+                        <li>ЭКГ, пульс, сатурация</li>
+                        <li>10 дней работы</li>
+                        <li>Сапфировое стекло</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Xiaomi Redmi Watch 5 -->
+                <div class="category-product-card">
+                    <img src="https://shop.mts.by/upload/resize_cache/iblock/7be/p8evr0nl9f67zql3s67rr9zgepwxj42r/500_926_1/watch_5_active_black_1.jpg" alt="Xiaomi Redmi Watch 5" class="category-product-image">
+                    <h3 class="category-product-title">Redmi Watch 5</h3>
+                    <div class="category-product-price">399 BYN</div>
+                    <ul class="category-features">
+                        <li>Большой AMOLED экран</li>
+                        <li>Звонки по Bluetooth</li>
+                        <li>Голосовой помощник</li>
+                        <li>16 дней работы</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Amazfit GTS 5 -->
+                <div class="category-product-card">
+                    <img src="https://lamantin.by/thumb/2/mXTA6FlvOQDgLPqxQOcVRw/r/d/umnye-chasy-xiaomi-redmi-watch-5-m2462w1-black-eu-1-356x356-4.jpg" alt="Amazfit GTS 5" class="category-product-image">
+                    <h3 class="category-product-title">Amazfit GTS 5</h3>
+                    <div class="category-product-price">599 BYN</div>
+                    <ul class="category-features">
+                        <li>Квадратный AMOLED</li>
+                        <li>NFC, GPS, пульс</li>
+                        <li>14 дней работы</li>
+                        <li>Тонкий корпус</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Honor Choice Watch -->
+                <div class="category-product-card">
+                    <img src="https://images.5element.by/resize/677/677189061977b020267f8e8c4d9ec1c2/600_600_1/de9541013ba2dd793d96e735d65061bb.jpg" alt="Honor Choice Watch" class="category-product-image">
+                    <h3 class="category-product-title">Honor Choice Watch</h3>
+                    <div class="category-product-price">299 BYN</div>
+                    <ul class="category-features">
+                        <li>AMOLED, AOD</li>
+                        <li>Прием звонков</li>
+                        <li>12 дней работы</li>
+                        <li>100+ спортивных режимов</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Apple Watch SE 3 -->
+                <div class="category-product-card">
+                    <img src="https://images.5element.by/resize/4ae/4ae966358d15e6b76d933b7b3d7df727/600_600_1/55d381c89f4cd3a4a8388bf9925fe8a3.jpg" alt="Apple Watch SE 3" class="category-product-image">
+                    <h3 class="category-product-title">Apple Watch SE 3</h3>
+                    <div class="category-product-price">899 BYN</div>
+                    <ul class="category-features">
+                        <li>Always-On дисплей</li>
+                        <li>Чип S10, уведомления</li>
+                        <li>Пульс, сон, активность</li>
+                        <li>До 24 ч работы</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-link">← Вернуться в бутик</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">⚜ STRATUM</a>
+                    <p>Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи.</p>
+                    <div class="social-links">
+                        <span>FB</span>
+                        <span>IG</span>
+                        <span>TG</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Коллекции</h4>
+                    <ul>
+                        <li><a href="sporting-club.html">Sporting Club</a></li>
+                        <li><a href="health-club.html">Health & Longevity</a></li>
+                        <li><a href="everyday-club.html">Everyday Classics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ателье</h4>
+                    <ul>
+                        <li><a href="index.html#atelier">Сервис</a></li>
+                        <li><a href="#">Гравировка</a></li>
+                        <li><a href="#">Ремешки</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Бутик</h4>
+                    <ul>
+                        <li>+375 29 123-45-67</li>
+                        <li>club@stratum.by</li>
+                        <li>Минск, Немига 3</li>
+                        <li>12:00 – 20:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Stratum. Все права защищены. Для избранных.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

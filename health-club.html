@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratum — Health & Longevity</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили только для страницы категории */
+        .category-hero {
+            height: 60vh;
+            background: linear-gradient(145deg, var(--black) 20%, var(--gentian-blue) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23C5A572" stroke-width="1"/><circle cx="50" cy="50" r="10" fill="none" stroke="%23C5A572" stroke-width="1"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+        }
+
+        .category-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+
+        .category-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .category-hero-content h1 {
+            font-size: 64px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', 'Didot', serif;
+        }
+
+        .category-hero-content h1 span {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .category-hero-content p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-description {
+            padding: 80px 0;
+            background-color: var(--black);
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .category-description h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-family: 'Times New Roman', serif;
+            color: var(--gold);
+        }
+
+        .category-description p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-tags {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-tag {
+            border: 1px solid var(--gold);
+            padding: 8px 24px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            font-family: 'Helvetica Neue', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .category-products {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+        }
+
+        .category-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .category-product-card {
+            background-color: rgba(255,255,255,0.02);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid rgba(197,165,114,0.15);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-product-card:hover {
+            background-color: rgba(0,51,102,0.2);
+            border-color: var(--gold);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        .category-product-image {
+            width: 100%;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(197,165,114,0.3);
+            padding-bottom: 20px;
+        }
+
+        .category-product-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Helvetica Neue', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .category-product-price {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .category-features {
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .category-features li {
+            color: var(--cream);
+            font-size: 14px;
+            font-family: 'Helvetica Neue', sans-serif;
+            margin-bottom: 8px;
+            list-style-type: none;
+        }
+
+        .category-features li::before {
+            content: '⚜';
+            color: var(--gold);
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            padding: 12px 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        @media (max-width: 1024px) {
+            .category-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .category-products-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-hero-content h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">⚜ STRATUM</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#collections">Коллекции</a></li>
+                    <li><a href="index.html#atelier">Ателье</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="category-hero">
+        <div class="container category-hero-content">
+            <h1>♥ <span>Health & Longevity</span> ♥</h1>
+            <p>Забота о себе в каждой детали. ЭКГ, давление, сатурация для тех, кто планирует жить долго и достойно.</p>
+        </div>
+    </section>
+
+    <section class="category-description">
+        <div class="container">
+            <h2>Медицинский мониторинг премиум-класса</h2>
+            <p>Коллекция Health & Longevity объединяет умные часы с расширенными медицинскими функциями. ЭКГ, измерение давления, сатурация, мониторинг стресса и качества сна — все это в элегантном корпусе для тех, кто заботится о своем здоровье.</p>
+            <div class="category-tags">
+                <span class="category-tag">APPLE</span>
+                <span class="category-tag">SAMSUNG</span>
+                <span class="category-tag">HUAWEI</span>
+                <span class="category-tag">WITHINGS</span>
+                <span class="category-tag">GARMIN</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-products">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <div class="section-divider"></div>
+                <h2 class="section-title">Модели Health & Longevity</h2>
+                <p class="section-subtitle">Инвестируйте в свое здоровье</p>
+            </div>
+
+            <div class="category-products-grid">
+                <!-- Apple Watch Series 11 -->
+                <div class="category-product-card">
+                    <img src="https://mobilworld.by/upload/iblock/8cd/8cd4d71570981dc0aa301d11d16b403d.jpg" alt="Apple Watch Series 11" class="category-product-image">
+                    <h3 class="category-product-title">Apple Watch Series 11</h3>
+                    <div class="category-product-price">2 199 BYN</div>
+                    <ul class="category-features">
+                        <li>ЭКГ, гипертония, сосудистая нагрузка</li>
+                        <li>Мониторинг сна, температура</li>
+                        <li>Обнаружение падений</li>
+                        <li>Always-On дисплей</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Samsung Galaxy Watch 8 Classic -->
+                <div class="category-product-card">
+                    <img src="https://mobillife.by/images/virtuemart/product/resized/galaxy_watch8_classic_black_250x250.jpg" alt="Samsung Galaxy Watch 8 Classic" class="category-product-image">
+                    <h3 class="category-product-title">Samsung GW8 Classic</h3>
+                    <div class="category-product-price">1 899 BYN</div>
+                    <ul class="category-features">
+                        <li>ЭКГ, состав тела, давление</li>
+                        <li>Антиоксидантный индекс</li>
+                        <li>Вращающийся безель</li>
+                        <li>Совместимость с Android</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Huawei Watch D -->
+                <div class="category-product-card">
+                    <img src="https://main-cdn.sbermegamarket.ru/big1/hlr-system/-88/083/627/324/010/100048087481b0.jpg" alt="Huawei Watch D" class="category-product-image">
+                    <h3 class="category-product-title">Huawei Watch D</h3>
+                    <div class="category-product-price">1 399 BYN</div>
+                    <ul class="category-features">
+                        <li>Измерение давления (медицинское)</li>
+                        <li>ЭКГ, сатурация, температура</li>
+                        <li>Надувной ремешок для давления</li>
+                        <li>До 7 дней работы</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Withings ScanWatch 2 -->
+                <div class="category-product-card">
+                    <img src="https://ir.ozone.ru/s3/multimedia-1-f/7495674567.jpg" alt="Withings ScanWatch 2" class="category-product-image">
+                    <h3 class="category-product-title">Withings ScanWatch 2</h3>
+                    <div class="category-product-price">1 799 BYN</div>
+                    <ul class="category-features">
+                        <li>Гибридный дизайн (стрелки + экран)</li>
+                        <li>ЭКГ, сатурация, температура</li>
+                        <li>30 дней автономности</li>
+                        <li>Медицинское одобрение FDA</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Garmin Venu 3 -->
+                <div class="category-product-card">
+                    <img src="https://www.garmin.by/upload/resize_cache/iblock/07c/390_390_1/lk509ug7wm421e1nic33z0fdt13r48x1.jpg" alt="Garmin Venu 3" class="category-product-image">
+                    <h3 class="category-product-title">Garmin Venu 3</h3>
+                    <div class="category-product-price">1 599 BYN</div>
+                    <ul class="category-features">
+                        <li>Body Battery, энергия тела</li>
+                        <li>Мониторинг стресса и сна</li>
+                        <li>Пульсоксиметр, частота дыхания</li>
+                        <li>AMOLED дисплей</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Amazfit Balance -->
+                <div class="category-product-card">
+                    <img src="https://images.5element.by/resize/cd1/cd1de4d65860a772bab026486a21286e/600_600_1/20bcb62103bc02365342ff440f3e7c6f.jpg" alt="Amazfit Balance" class="category-product-image">
+                    <h3 class="category-product-title">Amazfit Balance</h3>
+                    <div class="category-product-price">699 BYN</div>
+                    <ul class="category-features">
+                        <li>Пульс, сатурация, стресс</li>
+                        <li>Анализ состава тела</li>
+                        <li>14 дней работы</li>
+                        <li>AI-тренер здоровья</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-link">← Вернуться в бутик</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">⚜ STRATUM</a>
+                    <p>Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи.</p>
+                    <div class="social-links">
+                        <span>FB</span>
+                        <span>IG</span>
+                        <span>TG</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Коллекции</h4>
+                    <ul>
+                        <li><a href="sporting-club.html">Sporting Club</a></li>
+                        <li><a href="health-club.html">Health & Longevity</a></li>
+                        <li><a href="everyday-club.html">Everyday Classics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ателье</h4>
+                    <ul>
+                        <li><a href="index.html#atelier">Сервис</a></li>
+                        <li><a href="#">Гравировка</a></li>
+                        <li><a href="#">Ремешки</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Бутик</h4>
+                    <ul>
+                        <li>+375 29 123-45-67</li>
+                        <li>club@stratum.by</li>
+                        <li>Минск, Немига 3</li>
+                        <li>12:00 – 20:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Stratum. Все права защищены. Для избранных.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

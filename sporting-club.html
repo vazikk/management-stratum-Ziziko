@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratum — Sporting Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили только для страницы категории */
+        .category-hero {
+            height: 60vh;
+            background: linear-gradient(145deg, var(--black) 20%, var(--gentian-blue) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23C5A572" stroke-width="1"/><circle cx="50" cy="50" r="10" fill="none" stroke="%23C5A572" stroke-width="1"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+        }
+
+        .category-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+
+        .category-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .category-hero-content h1 {
+            font-size: 64px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', 'Didot', serif;
+        }
+
+        .category-hero-content h1 span {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .category-hero-content p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-description {
+            padding: 80px 0;
+            background-color: var(--black);
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .category-description h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-family: 'Times New Roman', serif;
+            color: var(--gold);
+        }
+
+        .category-description p {
+            font-size: 18px;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-family: 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+        }
+
+        .category-tags {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-tag {
+            border: 1px solid var(--gold);
+            padding: 8px 24px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            font-family: 'Helvetica Neue', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .category-products {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+        }
+
+        .category-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .category-product-card {
+            background-color: rgba(255,255,255,0.02);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid rgba(197,165,114,0.15);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-product-card:hover {
+            background-color: rgba(0,51,102,0.2);
+            border-color: var(--gold);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        .category-product-image {
+            width: 100%;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(197,165,114,0.3);
+            padding-bottom: 20px;
+        }
+
+        .category-product-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Helvetica Neue', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .category-product-price {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .category-features {
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .category-features li {
+            color: var(--cream);
+            font-size: 14px;
+            font-family: 'Helvetica Neue', sans-serif;
+            margin-bottom: 8px;
+            list-style-type: none;
+        }
+
+        .category-features li::before {
+            content: '⚜';
+            color: var(--gold);
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            padding: 12px 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        @media (max-width: 1024px) {
+            .category-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .category-products-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-hero-content h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">⚜ STRATUM</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#collections">Коллекции</a></li>
+                    <li><a href="index.html#atelier">Ателье</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="category-hero">
+        <div class="container category-hero-content">
+            <h1>⚜ <span>Sporting Club</span> ⚜</h1>
+            <p>Для тех, кто проводит выходные на поле для гольфа или яхте. Точность хронометра, выносливость, GPS, автономность.</p>
+        </div>
+    </section>
+
+    <section class="category-description">
+        <div class="container">
+            <h2>Элитные спортивные часы</h2>
+            <p>Коллекция Sporting Club объединяет премиальные спортивные часы, созданные для активного отдыха и профессиональных нагрузок. Каждая модель проходит строгие испытания и сертифицирована для экстремальных условий.</p>
+            <div class="category-tags">
+                <span class="category-tag">GARMIN</span>
+                <span class="category-tag">POLAR</span>
+                <span class="category-tag">ULTRA</span>
+                <span class="category-tag">SUUNTO</span>
+                <span class="category-tag">COROS</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-products">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <div class="section-divider"></div>
+                <h2 class="section-title">Модели Sporting Club</h2>
+                <p class="section-subtitle">Выберите свои часы</p>
+            </div>
+
+            <div class="category-products-grid">
+                <!-- Garmin Fenix 8 -->
+                <div class="category-product-card">
+                    <img src="https://m.media-amazon.com/images/I/51yv44icNkL._AC_UF894,1000_QL80_.jpg" alt="Garmin Fenix 8" class="category-product-image">
+                    <h3 class="category-product-title">Garmin Fenix 8</h3>
+                    <div class="category-product-price">2 499 BYN</div>
+                    <ul class="category-features">
+                        <li>AMOLED дисплей</li>
+                        <li>Мультидиапазонный GPS</li>
+                        <li>Карты TopoActive</li>
+                        <li>До 29 дней работы</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Polar Grit X2 Pro -->
+                <div class="category-product-card">
+                    <img src="https://static.insales-cdn.com/images/products/1/744/873415400/Polar-grit-x2-stone-gray.jpg" alt="Polar Grit X2 Pro" class="category-product-image">
+                    <h3 class="category-product-title">Polar Grit X2 Pro</h3>
+                    <div class="category-product-price">2 299 BYN</div>
+                    <ul class="category-features">
+                        <li>Военный стандарт прочности</li>
+                        <li>Тесты восстановления</li>
+                        <li>Маршрутизация навигации</li>
+                        <li>До 140 часов тренировок</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Apple Watch Ultra 2 -->
+                <div class="category-product-card">
+                    <img src="https://mobilworld.by/upload/iblock/f4c/f4c91ca0560be1f2225c513f9b6c2637.png" alt="Apple Watch Ultra 2" class="category-product-image">
+                    <h3 class="category-product-title">Apple Watch Ultra 2</h3>
+                    <div class="category-product-price">2 999 BYN</div>
+                    <ul class="category-features">
+                        <li>Титан, сапфировое стекло</li>
+                        <li>Дайвинг до 40 м</li>
+                        <li>Сирена 86 дБ</li>
+                        <li>Двойной GPS</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Suunto Vertical -->
+                <div class="category-product-card">
+                    <img src="https://static.1k.by/images/productsimages/ip/big/pp8/5/4727135/i4f86beaf9.jpg" alt="Suunto Vertical" class="category-product-image">
+                    <h3 class="category-product-title">Suunto Vertical</h3>
+                    <div class="category-product-price">1 999 BYN</div>
+                    <ul class="category-features">
+                        <li>Зарядка от солнца</li>
+                        <li>Топографические карты</li>
+                        <li>60 дней автономности</li>
+                        <li>Барометр/высотомер</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Coros Vertix 2 -->
+                <div class="category-product-card">
+                    <img src="https://meryl.com.ua/image/cache/catalog/product5/WV2TX-OBS/Coros-Vertix-2_12-400x500.jpg" alt="Coros Vertix 2" class="category-product-image">
+                    <h3 class="category-product-title">Coros Vertix 2</h3>
+                    <div class="category-product-price">2 199 BYN</div>
+                    <ul class="category-features">
+                        <li>60 дней GPS</li>
+                        <li>Двойная частота GPS</li>
+                        <li>Пульсоксиметр</li>
+                        <li>Титан, сапфир</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+
+                <!-- Amazfit T-Rex 3 -->
+                <div class="category-product-card">
+                    <img src="https://xistore.by/upload/resize/element/164771/e78/d9a8791f51b40737f15e70a27acf4780_384_384_80.jpg" alt="Amazfit T-Rex 3" class="category-product-image">
+                    <h3 class="category-product-title">Amazfit T-Rex 3</h3>
+                    <div class="category-product-price">899 BYN</div>
+                    <ul class="category-features">
+                        <li>Военный стандарт</li>
+                        <li>-30°C до +70°C</li>
+                        <li>27 дней работы</li>
+                        <li>GPS, пульсометр</li>
+                    </ul>
+                    <button class="btn-secondary">Подробнее</button>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-link">← Вернуться в бутик</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">⚜ STRATUM</a>
+                    <p>Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи.</p>
+                    <div class="social-links">
+                        <span>FB</span>
+                        <span>IG</span>
+                        <span>TG</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Коллекции</h4>
+                    <ul>
+                        <li><a href="sporting-club.html">Sporting Club</a></li>
+                        <li><a href="index.html#health-club">Health & Longevity</a></li>
+                        <li><a href="index.html#everyday-club">Everyday Classics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ателье</h4>
+                    <ul>
+                        <li><a href="index.html#atelier">Сервис</a></li>
+                        <li><a href="#">Гравировка</a></li>
+                        <li><a href="#">Ремешки</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Бутик</h4>
+                    <ul>
+                        <li>+375 29 123-45-67</li>
+                        <li>club@stratum.by</li>
+                        <li>Минск, Немига 3</li>
+                        <li>12:00 – 20:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Stratum. Все права защищены. Для избранных.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
