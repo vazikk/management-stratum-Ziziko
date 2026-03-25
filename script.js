@@ -1,7 +1,67 @@
-// JavaScript код
+// JavaScript код для сайта STRATUM
+
+// Текущий язык (по умолчанию русский)
+let currentLanguage = 'ru';
+
+// Функция переключения языка
+function switchLanguage(lang) {
+    currentLanguage = lang;
+    
+    // Обновляем активную кнопку
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(btn => {
+        if (btn.dataset.lang === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // Обновляем все элементы с data-ru и data-en атрибутами
+    const elementsToTranslate = document.querySelectorAll('[data-ru][data-en]');
+    elementsToTranslate.forEach(element => {
+        element.textContent = element.dataset[lang];
+    });
+    
+    // Обновляем атрибуты placeholder, если есть
+    const inputsWithPlaceholder = document.querySelectorAll('input[data-ru-placeholder][data-en-placeholder]');
+    inputsWithPlaceholder.forEach(input => {
+        input.placeholder = input.dataset[lang + 'Placeholder'];
+    });
+    
+    // Сохраняем выбор языка в localStorage
+    localStorage.setItem('stratum-language', lang);
+    
+    // Обновляем атрибут lang у html
+    document.documentElement.lang = lang;
+}
 
 // 1. Анимация появления элементов при скролле
 document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация языка из localStorage или браузера
+    const savedLanguage = localStorage.getItem('stratum-language');
+    if (savedLanguage) {
+        switchLanguage(savedLanguage);
+    } else {
+        // Определяем язык браузера
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('en')) {
+            switchLanguage('en');
+        } else {
+            switchLanguage('ru');
+        }
+    }
+    
+    // Добавляем обработчики для кнопок языка
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.dataset.lang;
+            switchLanguage(lang);
+        });
+    });
+    
+    // Анимация появления
     const fadeElements = document.querySelectorAll('.fade-in');
     
     function checkFade() {
@@ -72,5 +132,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    });
+});
+
+// 5. Добавляем data-атрибуты для элементов, которые должны переводиться
+// (Этот код запускается автоматически при загрузке страницы)
+document.addEventListener('DOMContentLoaded', function() {
+    // Для ссылок в навигации
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        if (!link.hasAttribute('data-ru')) {
+            const text = link.textContent;
+            link.setAttribute('data-ru', text);
+            // Примерный перевод на английский
+            if (text === 'Коллекции') link.setAttribute('data-en', 'Collections');
+            if (text === 'Ателье') link.setAttribute('data-en', 'Atelier');
+        }
+    });
+    
+    // Для заголовков и текстов
+    const elements = document.querySelectorAll('h1 span, h2, h3, p, .btn-primary, .segment-card h3, .segment-card p, .footer-col h4, .footer-col a, .footer-col p, .footer-col li:not(:has(a))');
+    elements.forEach(el => {
+        if (!el.hasAttribute('data-ru') && el.textContent.trim() && !el.querySelector('a')) {
+            const text = el.textContent.trim();
+            el.setAttribute('data-ru', text);
+            // Здесь можно добавить логику для перевода, но проще уже в HTML все прописать
+        }
     });
 });

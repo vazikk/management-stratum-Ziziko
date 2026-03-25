@@ -120,25 +120,33 @@
 
         .category-product-card {
             background-color: rgba(255,255,255,0.02);
-            padding: 32px 24px;
+            padding: 32px 24px 40px;
             text-align: center;
             border: 1px solid rgba(197,165,114,0.15);
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
         .category-product-card:hover {
-            background-color: rgba(0,51,102,0.2);
+            background-color: rgba(0,51,102,0.25);
             border-color: var(--gold);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
 
         .category-product-image {
             width: 100%;
             margin-bottom: 24px;
-            border-bottom: 1px solid rgba(197,165,114,0.3);
+            border-bottom: 1px solid rgba(197,165,114,0.2);
             padding-bottom: 20px;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        .category-product-card:hover .category-product-image {
+            transform: scale(1.02);
         }
 
         .category-product-title {
@@ -148,35 +156,66 @@
             font-family: 'Helvetica Neue', sans-serif;
             letter-spacing: 1px;
             text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .category-product-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .category-product-card:hover .category-product-title::after {
+            width: 80%;
+            left: 10%;
         }
 
         .category-product-price {
             color: var(--gold);
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 500;
             margin-bottom: 20px;
             font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(197, 165, 114, 0.3);
         }
 
         .category-features {
-            margin: 20px 0;
+            margin: 20px 0 25px;
             text-align: left;
-            padding: 0 15px;
+            padding: 0 10px;
+            flex-grow: 1;
         }
 
         .category-features li {
             color: var(--cream);
             font-size: 14px;
             font-family: 'Helvetica Neue', sans-serif;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             list-style-type: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .category-features li:hover {
+            transform: translateX(3px);
+            color: var(--gold);
         }
 
         .category-features li::before {
             content: '⚜';
             color: var(--gold);
-            margin-right: 8px;
+            margin-right: 10px;
             font-size: 12px;
+            opacity: 0.8;
         }
 
         .back-link {
@@ -220,24 +259,32 @@
             <a href="index.html" class="logo">⚜ STRATUM</a>
             <nav>
                 <ul>
-                    <li><a href="index.html#collections">Коллекции</a></li>
-                    <li><a href="index.html#atelier">Ателье</a></li>
+                    <li><a href="index.html#collections" data-ru="Коллекции" data-en="Collections">Коллекции</a></li>
+                    <li><a href="index.html#atelier" data-ru="Ателье" data-en="Atelier">Ателье</a></li>
                 </ul>
             </nav>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">ENG</button>
+            </div>
         </div>
     </header>
 
     <section class="category-hero">
         <div class="container category-hero-content">
-            <h1>⚜ <span>Sporting Club</span> ⚜</h1>
-            <p>Для тех, кто проводит выходные на поле для гольфа или яхте. Точность хронометра, выносливость, GPS, автономность.</p>
+            <h1>⚜ <span data-ru="Sporting Club" data-en="Sporting Club">Sporting Club</span> ⚜</h1>
+            <p data-ru="Для тех, кто проводит выходные на поле для гольфа или яхте. Точность хронометра, выносливость, GPS, автономность." 
+               data-en="For those who spend weekends on the golf course or yacht. Chronometer precision, endurance, GPS, autonomy.">
+            </p>
         </div>
     </section>
 
     <section class="category-description">
         <div class="container">
-            <h2>Элитные спортивные часы</h2>
-            <p>Коллекция Sporting Club объединяет премиальные спортивные часы, созданные для активного отдыха и профессиональных нагрузок. Каждая модель проходит строгие испытания и сертифицирована для экстремальных условий.</p>
+            <h2 data-ru="Элитные спортивные часы" data-en="Elite Sports Watches">Элитные спортивные часы</h2>
+            <p data-ru="Коллекция Sporting Club объединяет премиальные спортивные часы, созданные для активного отдыха и профессиональных нагрузок. Каждая модель проходит строгие испытания и сертифицирована для экстремальных условий." 
+               data-en="The Sporting Club collection brings together premium sports watches designed for active leisure and professional loads. Each model undergoes rigorous testing and is certified for extreme conditions.">
+            </p>
             <div class="category-tags">
                 <span class="category-tag">GARMIN</span>
                 <span class="category-tag">POLAR</span>
@@ -252,8 +299,8 @@
         <div class="container">
             <div class="section-title-wrapper">
                 <div class="section-divider"></div>
-                <h2 class="section-title">Модели Sporting Club</h2>
-                <p class="section-subtitle">Выберите свои часы</p>
+                <h2 class="section-title" data-ru="Модели Sporting Club" data-en="Sporting Club Models">Модели Sporting Club</h2>
+                <p class="section-subtitle" data-ru="Выберите свои часы" data-en="Choose your watch">Выберите свои часы</p>
             </div>
 
             <div class="category-products-grid">
@@ -263,12 +310,12 @@
                     <h3 class="category-product-title">Garmin Fenix 8</h3>
                     <div class="category-product-price">2 499 BYN</div>
                     <ul class="category-features">
-                        <li>AMOLED дисплей</li>
-                        <li>Мультидиапазонный GPS</li>
-                        <li>Карты TopoActive</li>
-                        <li>До 29 дней работы</li>
+                        <li data-ru="AMOLED дисплей" data-en="AMOLED display">AMOLED дисплей</li>
+                        <li data-ru="Мультидиапазонный GPS" data-en="Multi-band GPS">Мультидиапазонный GPS</li>
+                        <li data-ru="Карты TopoActive" data-en="TopoActive maps">Карты TopoActive</li>
+                        <li data-ru="До 29 дней работы" data-en="Up to 29 days battery">До 29 дней работы</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
 
                 <!-- Polar Grit X2 Pro -->
@@ -277,26 +324,26 @@
                     <h3 class="category-product-title">Polar Grit X2 Pro</h3>
                     <div class="category-product-price">2 299 BYN</div>
                     <ul class="category-features">
-                        <li>Военный стандарт прочности</li>
-                        <li>Тесты восстановления</li>
-                        <li>Маршрутизация навигации</li>
-                        <li>До 140 часов тренировок</li>
+                        <li data-ru="Военный стандарт прочности" data-en="Military grade durability">Военный стандарт прочности</li>
+                        <li data-ru="Тесты восстановления" data-en="Recovery tests">Тесты восстановления</li>
+                        <li data-ru="Маршрутизация навигации" data-en="Navigation routing">Маршрутизация навигации</li>
+                        <li data-ru="До 140 часов тренировок" data-en="Up to 140h training">До 140 часов тренировок</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
 
                 <!-- Apple Watch Ultra 2 -->
                 <div class="category-product-card">
-                    <img src="https://mobilworld.by/upload/iblock/f4c/f4c91ca0560be1f2225c513f9b6c2637.png" alt="Apple Watch Ultra 2" class="category-product-image">
+                    <img src="https://i-center.by/images/o/apple-watch-ultra-2-lte-49-mm-titanovyj-korpus-titanovyj-bezhevo-oranzhevyj-nejlonovyj-remeshok-razmera-s-m_1.jpg" alt="Apple Watch Ultra 2" class="category-product-image">
                     <h3 class="category-product-title">Apple Watch Ultra 2</h3>
                     <div class="category-product-price">2 999 BYN</div>
                     <ul class="category-features">
-                        <li>Титан, сапфировое стекло</li>
-                        <li>Дайвинг до 40 м</li>
-                        <li>Сирена 86 дБ</li>
-                        <li>Двойной GPS</li>
+                        <li data-ru="Титан, сапфировое стекло" data-en="Titanium, sapphire glass">Титан, сапфировое стекло</li>
+                        <li data-ru="Дайвинг до 40 м" data-en="Diving up to 40m">Дайвинг до 40 м</li>
+                        <li data-ru="Сирена 86 дБ" data-en="86 dB siren">Сирена 86 дБ</li>
+                        <li data-ru="Двойной GPS" data-en="Dual GPS">Двойной GPS</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
 
                 <!-- Suunto Vertical -->
@@ -305,12 +352,12 @@
                     <h3 class="category-product-title">Suunto Vertical</h3>
                     <div class="category-product-price">1 999 BYN</div>
                     <ul class="category-features">
-                        <li>Зарядка от солнца</li>
-                        <li>Топографические карты</li>
-                        <li>60 дней автономности</li>
-                        <li>Барометр/высотомер</li>
+                        <li data-ru="Зарядка от солнца" data-en="Solar charging">Зарядка от солнца</li>
+                        <li data-ru="Топографические карты" data-en="Topographic maps">Топографические карты</li>
+                        <li data-ru="60 дней автономности" data-en="60 days battery">60 дней автономности</li>
+                        <li data-ru="Барометр/высотомер" data-en="Barometer/altimeter">Барометр/высотомер</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
 
                 <!-- Coros Vertix 2 -->
@@ -319,12 +366,12 @@
                     <h3 class="category-product-title">Coros Vertix 2</h3>
                     <div class="category-product-price">2 199 BYN</div>
                     <ul class="category-features">
-                        <li>60 дней GPS</li>
-                        <li>Двойная частота GPS</li>
-                        <li>Пульсоксиметр</li>
-                        <li>Титан, сапфир</li>
+                        <li data-ru="60 дней GPS" data-en="60 days GPS">60 дней GPS</li>
+                        <li data-ru="Двойная частота GPS" data-en="Dual frequency GPS">Двойная частота GPS</li>
+                        <li data-ru="Пульсоксиметр" data-en="Pulse oximeter">Пульсоксиметр</li>
+                        <li data-ru="Титан, сапфир" data-en="Titanium, sapphire">Титан, сапфир</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
 
                 <!-- Amazfit T-Rex 3 -->
@@ -333,17 +380,17 @@
                     <h3 class="category-product-title">Amazfit T-Rex 3</h3>
                     <div class="category-product-price">899 BYN</div>
                     <ul class="category-features">
-                        <li>Военный стандарт</li>
-                        <li>-30°C до +70°C</li>
-                        <li>27 дней работы</li>
-                        <li>GPS, пульсометр</li>
+                        <li data-ru="Военный стандарт" data-en="Military standard">Военный стандарт</li>
+                        <li data-ru="-30°C до +70°C" data-en="-30°C to +70°C">-30°C до +70°C</li>
+                        <li data-ru="27 дней работы" data-en="27 days battery">27 дней работы</li>
+                        <li data-ru="GPS, пульсометр" data-en="GPS, heart rate">GPS, пульсометр</li>
                     </ul>
-                    <button class="btn-secondary">Подробнее</button>
+                    <button class="btn-secondary" data-ru="Подробнее" data-en="Details">Подробнее</button>
                 </div>
             </div>
 
             <div style="text-align: center;">
-                <a href="index.html" class="back-link">← Вернуться в бутик</a>
+                <a href="index.html" class="back-link" data-ru="← Вернуться в бутик" data-en="← Back to boutique">← Вернуться в бутик</a>
             </div>
         </div>
     </section>
@@ -353,7 +400,9 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="index.html" class="footer-logo">⚜ STRATUM</a>
-                    <p>Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи.</p>
+                    <p data-ru="Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи." 
+                       data-en="Premium smart watch boutique. Minsk, Nemiga 3. By appointment only.">
+                    </p>
                     <div class="social-links">
                         <span>FB</span>
                         <span>IG</span>
@@ -361,33 +410,35 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Коллекции</h4>
+                    <h4 data-ru="Коллекции" data-en="Collections">Коллекции</h4>
                     <ul>
-                        <li><a href="sporting-club.html">Sporting Club</a></li>
-                        <li><a href="index.html#health-club">Health & Longevity</a></li>
-                        <li><a href="index.html#everyday-club">Everyday Classics</a></li>
+                        <li><a href="sporting-club.html" data-ru="Sporting Club" data-en="Sporting Club">Sporting Club</a></li>
+                        <li><a href="health-club.html" data-ru="Health & Longevity" data-en="Health & Longevity">Health & Longevity</a></li>
+                        <li><a href="everyday-club.html" data-ru="Everyday Classics" data-en="Everyday Classics">Everyday Classics</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Ателье</h4>
+                    <h4 data-ru="Ателье" data-en="Atelier">Ателье</h4>
                     <ul>
-                        <li><a href="index.html#atelier">Сервис</a></li>
-                        <li><a href="#">Гравировка</a></li>
-                        <li><a href="#">Ремешки</a></li>
+                        <li><a href="index.html#atelier" data-ru="Сервис" data-en="Service">Сервис</a></li>
+                        <li><a href="#" data-ru="Гравировка" data-en="Engraving">Гравировка</a></li>
+                        <li><a href="#" data-ru="Ремешки" data-en="Straps">Ремешки</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Бутик</h4>
+                    <h4 data-ru="Бутик" data-en="Boutique">Бутик</h4>
                     <ul>
                         <li>+375 29 123-45-67</li>
                         <li>club@stratum.by</li>
-                        <li>Минск, Немига 3</li>
+                        <li data-ru="Минск, Немига 3" data-en="Minsk, Nemiga 3">Минск, Немига 3</li>
                         <li>12:00 – 20:00</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                © 2026 Stratum. Все права защищены. Для избранных.
+                <span data-ru="© 2026 Stratum. Все права защищены. Для избранных." 
+                      data-en="© 2026 Stratum. All rights reserved. For the select few.">
+                </span>
             </div>
         </div>
     </footer>

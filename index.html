@@ -13,23 +13,33 @@
             <a href="/" class="logo">⚜ STRATUM</a>
             <nav>
                 <ul>
-                    <li><a href="#collections">Коллекции</a></li>
-                    <li><a href="#atelier">Ателье</a></li>
+                    <li><a href="#collections" data-ru="Коллекции" data-en="Collections">Коллекции</a></li>
+                    <li><a href="#atelier" data-ru="Ателье" data-en="Atelier">Ателье</a></li>
                 </ul>
             </nav>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">ENG</button>
+            </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text fade-in">
-                <h1>Время,<br><span>достойное</span><br>вашего уровня</h1>
-                <p>Премиальные умные часы для тех, кто ценит статус, технологии и вневременную элегантность. Закрытый клуб для избранных.</p>
-                <button class="btn-primary" id="discoverBtn">Открыть бутик</button>
+                <h1>
+                    <span data-ru="Время," data-en="Time,"></span><br>
+                    <span data-ru="достойное" data-en="worthy of"></span><br>
+                    <span data-ru="вашего уровня" data-en="your level"></span>
+                </h1>
+                <p data-ru="Премиальные умные часы для тех, кто ценит статус, технологии и вневременную элегантность. Закрытый клуб для избранных." 
+                   data-en="Premium smart watches for those who value status, technology and timeless elegance. A private club for the select few.">
+                </p>
+                <button class="btn-primary" id="discoverBtn" data-ru="Открыть бутик" data-en="Open boutique">Открыть бутик</button>
             </div>
             <div class="hero-image fade-in">
                 <img src="https://static.tildacdn.com/tild3161-3364-4130-b266-323261613265/Bernhard_H_Mayer_.jpg" alt="Stratum премиальные часы">
-                <div class="image-caption">Gentian Blue Edition</div>
+                <div class="image-caption" data-ru="Gentian Blue Edition" data-en="Gentian Blue Edition">Gentian Blue Edition</div>
             </div>
         </div>
     </section>
@@ -38,24 +48,28 @@
         <div class="container">
             <div class="section-title-wrapper fade-in">
                 <div class="section-divider"></div>
-                <h2 class="section-title">Три пути. Один уровень</h2>
-                <p class="section-subtitle">Выберите свою историю</p>
+                <h2 class="section-title" data-ru="Три пути. Один уровень" data-en="Three paths. One level">Три пути. Один уровень</h2>
+                <p class="section-subtitle" data-ru="Выберите свою историю" data-en="Choose your story">Выберите свою историю</p>
             </div>
             <div class="segment-grid">
                 <a href="sporting-club.html" style="text-decoration: none; color: inherit; display: block;">
                     <div id="sport-club" class="segment-card fade-in">
                         <div class="segment-icon">⛳</div>
-                        <h3>Sporting Club</h3>
-                        <p>Для тех, кто проводит выходные на поле для гольфа или яхте. Точность хронометра, выносливость, GPS, автономность.</p>
+                        <h3 data-ru="Sporting Club" data-en="Sporting Club">Sporting Club</h3>
+                        <p data-ru="Для тех, кто проводит выходные на поле для гольфа или яхте. Точность хронометра, выносливость, GPS, автономность." 
+                           data-en="For those who spend weekends on the golf course or yacht. Chronometer precision, endurance, GPS, autonomy.">
+                        </p>
                         <div class="segment-tag">GARMIN · POLAR · ULTRA</div>
                     </div>
                 </a>
                 
                 <a href="health-club.html" style="text-decoration: none; color: inherit; display: block;">
                     <div id="health-club" class="segment-card fade-in">
-                        <div class="segment-icon">♥</div>
-                        <h3>Health & Longevity</h3>
-                        <p>Забота о себе в каждой детали. ЭКГ, давление, сатурация для тех, кто планирует жить долго и достойно.</p>
+                        <div class="segment-icon">❤️</div>
+                        <h3 data-ru="Health & Longevity" data-en="Health & Longevity">Health & Longevity</h3>
+                        <p data-ru="Забота о себе в каждой детали. ЭКГ, давление, сатурация для тех, кто планирует жить долго и достойно." 
+                           data-en="Self-care in every detail. ECG, blood pressure, SpO2 for those who plan to live long and well.">
+                        </p>
                         <div class="segment-tag">APPLE · SAMSUNG · HUAWEI</div>
                     </div>
                 </a>
@@ -63,8 +77,10 @@
                 <a href="everyday-club.html" style="text-decoration: none; color: inherit; display: block;">
                     <div id="everyday-club" class="segment-card fade-in">
                         <div class="segment-icon">⌚</div>
-                        <h3>Everyday Classics</h3>
-                        <p>Уместно всегда и везде. Дизайн, не выходящий из моды. Технологии, делающие жизнь удобнее.</p>
+                        <h3 data-ru="Everyday Classics" data-en="Everyday Classics">Everyday Classics</h3>
+                        <p data-ru="Уместно всегда и везде. Дизайн, не выходящий из моды. Технологии, делающие жизнь удобнее." 
+                           data-en="Appropriate always and everywhere. Timeless design. Technologies that make life more convenient.">
+                        </p>
                         <div class="segment-tag">XIAOMI · SAMSUNG · HUAWEI</div>
                     </div>
                 </a>
@@ -75,35 +91,113 @@
     <section class="philosophy">
         <div class="container philosophy-content">
             <div class="philosophy-text fade-in">
-                <h2>Не просто часы.<br>Кодекс Stratum</h2>
-                <p>Мы не продаём гаджеты. Мы предлагаем принадлежность к миру, где ценят качество, а не количество. Где синий Gentian напоминает о путешествиях на Porsche, а кожа Cognac — о креслах в частном клубе.</p>
+                <h2>
+                    <span data-ru="Не просто часы." data-en="Not just watches."></span><br>
+                    <span data-ru="Кодекс Stratum" data-en="The Stratum Code"></span>
+                </h2>
+                <p data-ru="Мы не продаём гаджеты. Мы предлагаем принадлежность к миру, где ценят качество, а не количество. Где синий Gentian напоминает о путешествиях на Porsche, а кожа Cognac — о креслах в частном клубе." 
+                   data-en="We don't sell gadgets. We offer belonging to a world where quality is valued, not quantity. Where Gentian blue reminds of Porsche journeys, and Cognac leather of armchairs in a private club.">
+                </p>
                 <div class="heritage">
                     <div class="heritage-item">
-                        <span>1923</span>
-                        <p>Основание</p>
+                        <span data-ru="1923" data-en="1923">1923</span>
+                        <p data-ru="Основание" data-en="Founded">Основание</p>
                     </div>
                     <div class="heritage-item">
-                        <span>5</span>
-                        <p>Поколений</p>
+                        <span data-ru="5" data-en="5">5</span>
+                        <p data-ru="Поколений" data-en="Generations">Поколений</p>
                     </div>
                     <div class="heritage-item">
-                        <span>100%</span>
-                        <p>Аутентичность</p>
+                        <span data-ru="100%" data-en="100%">100%</span>
+                        <p data-ru="Аутентичность" data-en="Authenticity">Аутентичность</p>
                     </div>
                 </div>
-                <div class="signature">— Stratum Heritage</div>
+                <div class="signature" data-ru="— Stratum Heritage" data-en="— Stratum Heritage">— Stratum Heritage</div>
             </div>
             <div class="philosophy-image fade-in">
                 <img src="https://applefun.com.ua/source/epix-pro-gen-2-1.jpg?1686123082559" alt="Old Money стиль">
-                <div class="image-caption">Gentian Blue · Cognac</div>
+                <div class="image-caption" data-ru="Gentian Blue · Cognac" data-en="Gentian Blue · Cognac">Gentian Blue · Cognac</div>
             </div>
         </div>
     </section>
 
-    <section id="atelier" class="newsletter">
+    <section id="atelier" class="atelier">
         <div class="container">
-            <h3 class="fade-in">Ателье</h3>
-            <p class="fade-in">Индивидуальная работа с каждым клиентом. Гравировка, подбор ремешков, настройка под ваш стиль.</p>
+            <div class="section-title-wrapper fade-in">
+                <div class="section-divider"></div>
+                <h2 class="section-title" data-ru="Ателье Stratum" data-en="Stratum Atelier">Ателье Stratum</h2>
+                <p class="section-subtitle" data-ru="Индивидуальный подход к каждому клиенту" data-en="Individual approach to every client">Индивидуальный подход к каждому клиенту</p>
+            </div>
+            
+            <div class="atelier-grid">
+                <!-- Карточка 1: Гравировка -->
+                <div class="atelier-card fade-in">
+                    <div class="atelier-image">
+                        <!-- Вставьте свою картинку -->
+                        <img src="https://via.placeholder.com/400x300/0F0F0F/C5A572?text=Engraving" alt="Гравировка">
+                    </div>
+                    <div class="atelier-content">
+                        <h3 data-ru="Гравировка" data-en="Engraving">Гравировка</h3>
+                        <p data-ru="Персональная гравировка на задней крышке часов. Инициалы, дата, значимые символы." 
+                        data-en="Personal engraving on the watch case back. Initials, date, meaningful symbols.">
+                        </p>
+                        <div class="atelier-price">
+                            <span data-ru="от 50 BYN" data-en="from 50 BYN">от 50 BYN</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карточка 2: Ремешки -->
+                <div class="atelier-card fade-in">
+                    <div class="atelier-image">
+                        <!-- Вставьте свою картинку -->
+                        <img src="https://via.placeholder.com/400x300/0F0F0F/C5A572?text=Straps" alt="Ремешки">
+                    </div>
+                    <div class="atelier-content">
+                        <h3 data-ru="Ремешки" data-en="Straps">Ремешки</h3>
+                        <p data-ru="Эксклюзивные ремешки из кожи, титана, каучука. Индивидуальный подбор под вашу модель." 
+                        data-en="Exclusive straps made of leather, titanium, rubber. Individual selection for your model.">
+                        </p>
+                        <div class="atelier-price">
+                            <span data-ru="от 120 BYN" data-en="from 120 BYN">от 120 BYN</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карточка 3: Сервис -->
+                <div class="atelier-card fade-in">
+                    <div class="atelier-image">
+                        <!-- Вставьте свою картинку -->
+                        <img src="https://via.placeholder.com/400x300/0F0F0F/C5A572?text=Service" alt="Сервис">
+                    </div>
+                    <div class="atelier-content">
+                        <h3 data-ru="Сервис" data-en="Service">Сервис</h3>
+                        <p data-ru="Профессиональное обслуживание, замена батареи, ремонт, калибровка датчиков." 
+                        data-en="Professional maintenance, battery replacement, repair, sensor calibration.">
+                        </p>
+                        <div class="atelier-price">
+                            <span data-ru="от 30 BYN" data-en="from 30 BYN">от 30 BYN</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карточка 4: Защитные стекла -->
+                <div class="atelier-card fade-in">
+                    <div class="atelier-image">
+                        <!-- Вставьте свою картинку -->
+                        <img src="https://via.placeholder.com/400x300/0F0F0F/C5A572?text=Glass" alt="Защитные стекла">
+                    </div>
+                    <div class="atelier-content">
+                        <h3 data-ru="Защитные стекла" data-en="Protective Glass">Защитные стекла</h3>
+                        <p data-ru="Установка сапфировых и закаленных стекол. Максимальная защита экрана." 
+                        data-en="Installation of sapphire and tempered glass. Maximum screen protection.">
+                        </p>
+                        <div class="atelier-price">
+                            <span data-ru="от 45 BYN" data-en="from 45 BYN">от 45 BYN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -112,7 +206,9 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="/" class="footer-logo">⚜ STRATUM</a>
-                    <p>Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи.</p>
+                    <p data-ru="Бутик премиальных умных часов. Минск, Немига 3. Только по предварительной записи." 
+                       data-en="Premium smart watch boutique. Minsk, Nemiga 3. By appointment only.">
+                    </p>
                     <div class="social-links">
                         <span>FB</span>
                         <span>IG</span>
@@ -120,35 +216,35 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Коллекции</h4>
+                    <h4 data-ru="Коллекции" data-en="Collections">Коллекции</h4>
                     <ul>
-                        <li><a href="sporting-club.html">Sporting Club</a></li>
-                        <li><a href="health-club.html">Health & Longevity</a></li>
-                        <li><a href="everyday-club.html">Everyday Classics</a></li>
-                        <li><a href="#">Аксессуары</a></li>
+                        <li><a href="sporting-club.html" data-ru="Sporting Club" data-en="Sporting Club">Sporting Club</a></li>
+                        <li><a href="health-club.html" data-ru="Health & Longevity" data-en="Health & Longevity">Health & Longevity</a></li>
+                        <li><a href="everyday-club.html" data-ru="Everyday Classics" data-en="Everyday Classics">Everyday Classics</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Ателье</h4>
+                    <h4 data-ru="Ателье" data-en="Atelier">Ателье</h4>
                     <ul>
-                        <li><a href="#atelier">Сервис</a></li>
-                        <li><a href="#">Гравировка</a></li>
-                        <li><a href="#">Ремешки</a></li>
-                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#atelier" data-ru="Сервис" data-en="Service">Сервис</a></li>
+                        <li><a href="#" data-ru="Гравировка" data-en="Engraving">Гравировка</a></li>
+                        <li><a href="#" data-ru="Ремешки" data-en="Straps">Ремешки</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Бутик</h4>
+                    <h4 data-ru="Бутик" data-en="Boutique">Бутик</h4>
                     <ul>
-                        <li><a href="#">+375 29 123-45-67</a></li>
-                        <li><a href="#">club@stratum.by</a></li>
-                        <li><a href="#">Минск, Немига 3</a></li>
-                        <li><a href="#">12:00 – 20:00</a></li>
+                        <li>+375 29 123-45-67</li>
+                        <li>club@stratum.by</li>
+                        <li data-ru="Минск, Немига 3" data-en="Minsk, Nemiga 3">Минск, Немига 3</li>
+                        <li>12:00 – 20:00</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                © 2026 Stratum. Все права защищены. Для избранных.
+                <span data-ru="© 2026 Stratum. Все права защищены. Для избранных." 
+                      data-en="© 2026 Stratum. All rights reserved. For the select few.">
+                </span>
             </div>
         </div>
     </footer>

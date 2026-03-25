@@ -1,4 +1,4 @@
-/* Добавьте эти строки в начало вашего CSS файла */
+/* Основные стили */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
@@ -53,6 +53,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    position: relative;
 }
 
 .logo {
@@ -84,6 +85,35 @@ nav a {
 
 nav a:hover {
     color: var(--gold);
+}
+
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    gap: 5px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--white);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    border-radius: 4px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.lang-btn.active {
+    background: var(--gold);
+    color: var(--black);
+}
+
+.lang-btn:hover {
+    background: rgba(197, 165, 114, 0.2);
 }
 
 /* Hero Section */
@@ -259,6 +289,9 @@ nav a:hover {
     border: 1px solid rgba(197, 165, 114, 0.2);
     position: relative;
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .segment-card::before {
@@ -300,6 +333,7 @@ nav a:hover {
     font-size: 15px;
     font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.8;
+    flex-grow: 1;
 }
 
 .segment-tag {
@@ -312,78 +346,6 @@ nav a:hover {
     padding-top: 20px;
     margin-top: 20px;
     font-family: 'Helvetica Neue', sans-serif;
-}
-
-/* Featured Products */
-.featured {
-    padding: 120px 0;
-    background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
-    position: relative;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.product-card {
-    background-color: rgba(255,255,255,0.02);
-    padding: 32px 24px;
-    text-align: center;
-    border: 1px solid rgba(197,165,114,0.15);
-    transition: all 0.4s;
-    backdrop-filter: blur(10px);
-}
-
-.product-card:hover {
-    background-color: rgba(0,51,102,0.2);
-    border-color: var(--gold);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
-}
-
-.product-image {
-    width: 100%;
-    margin-bottom: 24px;
-    border-bottom: 1px solid rgba(197,165,114,0.3);
-    padding-bottom: 20px;
-}
-
-.product-title {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 12px;
-    font-family: 'Helvetica Neue', sans-serif;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.product-price {
-    color: var(--gold);
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    font-family: 'Times New Roman', serif;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    border: 1px solid var(--gold);
-    color: var(--white);
-    padding: 12px 30px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Helvetica Neue', sans-serif;
-    width: 100%;
-}
-
-.btn-secondary:hover {
-    background-color: var(--gold);
-    color: var(--black);
 }
 
 /* Philosophy Section */
@@ -566,6 +528,9 @@ footer::before {
 
 .footer-col li {
     margin-bottom: 14px;
+    color: var(--cream);
+    font-size: 14px;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 .footer-col a {
@@ -620,7 +585,7 @@ footer::before {
         margin-left: auto;
         margin-right: auto;
     }
-    .segment-grid, .product-grid {
+    .segment-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     .philosophy-content {
@@ -631,8 +596,23 @@ footer::before {
     }
 }
 
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px 0;
+    }
+    nav ul {
+        gap: 20px;
+    }
+    .language-switcher {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
 @media (max-width: 640px) {
-    .segment-grid, .product-grid {
+    .segment-grid {
         grid-template-columns: 1fr;
     }
     .footer-grid {
@@ -656,4 +636,401 @@ footer::before {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+
+
+/* ===== ОБНОВЛЕННЫЙ СТИЛЬ КНОПКИ "ПОДРОБНЕЕ" ===== */
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 14px 30px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    font-family: 'Helvetica Neue', sans-serif;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-weight: 500;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(197, 165, 114, 0.2), transparent);
+    transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: -1;
+}
+
+.btn-secondary:hover {
+    background-color: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary:hover::before {
+    left: 100%;
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Альтернативный вариант с элегантным свечением */
+.btn-secondary-glow {
+    background-color: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 14px 30px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica Neue', sans-serif;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    box-shadow: 0 0 0 rgba(197, 165, 114, 0);
+}
+
+.btn-secondary-glow:hover {
+    background-color: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(197, 165, 114, 0.5);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Вариант с тонкой обводкой и минимализмом */
+.btn-secondary-minimal {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold);
+    color: var(--cream);
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica Neue', sans-serif;
+    width: auto;
+    display: inline-block;
+    font-weight: 400;
+    position: relative;
+}
+
+.btn-secondary-minimal::after {
+    content: '→';
+    margin-left: 8px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-secondary-minimal:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    letter-spacing: 4px;
+}
+
+.btn-secondary-minimal:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Стили для карточек товаров (обновление) */
+.category-product-card {
+    background-color: rgba(255,255,255,0.02);
+    padding: 32px 24px 40px;
+    text-align: center;
+    border: 1px solid rgba(197,165,114,0.15);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.category-product-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.category-product-card:hover {
+    background-color: rgba(0,51,102,0.25);
+    border-color: var(--gold);
+    transform: translateY(-8px);
+}
+
+.category-product-card:hover::after {
+    opacity: 1;
+}
+
+.category-product-image {
+    width: 100%;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(197,165,114,0.2);
+    padding-bottom: 20px;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+}
+
+.category-product-card:hover .category-product-image {
+    transform: scale(1.02);
+}
+
+.category-product-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: 'Helvetica Neue', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.category-product-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transition: width 0.3s ease;
+}
+
+.category-product-card:hover .category-product-title::after {
+    width: 80%;
+    left: 10%;
+}
+
+.category-product-price {
+    color: var(--gold);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(197, 165, 114, 0.3);
+}
+
+.category-features {
+    margin: 20px 0 25px;
+    text-align: left;
+    padding: 0 10px;
+    flex-grow: 1;
+}
+
+.category-features li {
+    color: var(--cream);
+    font-size: 14px;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-bottom: 12px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.category-features li:hover {
+    transform: translateX(3px);
+    color: var(--gold);
+}
+
+.category-features li::before {
+    content: '⚜';
+    color: var(--gold);
+    margin-right: 10px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+
+
+/* ===== АТЕЛЬЕ (В СТИЛЕ БУТИКА, БЕЗ КНОПОК) ===== */
+.atelier {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+    position: relative;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+}
+
+.atelier::before {
+    content: '⚜';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    background: var(--navy);
+    padding: 0 30px;
+    color: var(--gold);
+    z-index: 2;
+}
+
+.atelier-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.atelier-card {
+    background-color: rgba(255,255,255,0.02);
+    padding: 0 0 32px 0;
+    text-align: center;
+    border: 1px solid rgba(197,165,114,0.15);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.atelier-card:hover {
+    background-color: rgba(0,51,102,0.25);
+    border-color: var(--gold);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+}
+
+.atelier-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(197,165,114,0.2);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.atelier-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(197,165,114,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.atelier-card:hover .atelier-image::after {
+    left: 100%;
+}
+
+.atelier-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.atelier-card:hover .atelier-image img {
+    transform: scale(1.05);
+}
+
+.atelier-content {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.atelier-content h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: 'Helvetica Neue', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+    align-self: center;
+}
+
+.atelier-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transition: width 0.3s ease;
+}
+
+.atelier-card:hover .atelier-content h3::after {
+    width: 80%;
+    left: 10%;
+}
+
+.atelier-content p {
+    color: var(--cream);
+    font-size: 14px;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.atelier-price {
+    color: var(--gold);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(197,165,114,0.2);
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+/* Адаптивность для ателье */
+@media (max-width: 1024px) {
+    .atelier-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .atelier-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .atelier-image {
+        height: 180px;
+    }
 }
