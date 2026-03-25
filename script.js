@@ -24,7 +24,7 @@ function switchLanguage(lang) {
     });
     
     // Обновляем атрибуты placeholder, если есть
-    const inputsWithPlaceholder = document.querySelectorAll('input[data-ru-placeholder][data-en-placeholder]');
+    const inputsWithPlaceholder = document.querySelectorAll('input[data-ru-placeholder][data-en-placeholder], textarea[data-ru-placeholder][data-en-placeholder]');
     inputsWithPlaceholder.forEach(input => {
         input.placeholder = input.dataset[lang + 'Placeholder'];
     });
@@ -37,13 +37,169 @@ function switchLanguage(lang) {
 }
 
 // 1. Анимация появления элементов при скролле
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация языка из localStorage или браузера
+function initFadeAnimation() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    function checkFade() {
+        fadeElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementTop < windowHeight - 100) {
+                element.classList.add('visible');
+            }
+        });
+    }
+    
+    checkFade();
+    window.addEventListener('scroll', checkFade);
+}
+
+// 2. Обработка кнопки "Открыть бутик"
+function initDiscoverButton() {
+    const discoverBtn = document.getElementById('discoverBtn');
+    
+    if (discoverBtn) {
+        discoverBtn.addEventListener('click', function() {
+            const collectionsSection = document.getElementById('collections');
+            if (collectionsSection) {
+                collectionsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+}
+
+// 3. Эффект параллакса для hero секции
+function initParallax() {
+    const hero = document.querySelector('.hero');
+    const heroImage = document.querySelector('.hero-image');
+    
+    if (hero && heroImage) {
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition < hero.offsetHeight) {
+                heroImage.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+            }
+        });
+    }
+}
+
+// 4. Плавная прокрутка для всех ссылок с якорями
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    const header = document.querySelector('header');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '#') return;
+            
+            const targetId = href.substring(1);
+            if (targetId === '') return;
+            
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// 5. Инициализация перевода для элементов без data-атрибутов
+function initTranslationFallback() {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        if (!link.hasAttribute('data-ru') && link.textContent.trim()) {
+            const text = link.textContent.trim();
+            link.setAttribute('data-ru', text);
+            if (text === 'Коллекции') link.setAttribute('data-en', 'Collections');
+            if (text === 'Ателье') link.setAttribute('data-en', 'Atelier');
+        }
+    });
+}
+
+// 6. Модальное окно записи
+function initBookingModal() {
+    const modal = document.getElementById('bookingModal');
+    const bookBtn = document.getElementById('bookAppointmentBtn');
+    const closeBtn = document.querySelector('.modal-close');
+    const bookingForm = document.getElementById('bookingForm');
+    
+    // Проверяем существование элементов
+    if (!modal) {
+        console.log('Модальное окно не найдено');
+        return;
+    }
+    
+    if (!bookBtn) {
+        console.log('Кнопка записи не найдена');
+        return;
+    }
+    
+    console.log('Модальное окно и кнопка найдены');
+    
+    // Открыть модальное окно
+    bookBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Клик по кнопке записи');
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Закрыть модальное окно (крестик)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    // Закрыть при клике вне окна
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Обработка отправки формы
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(currentLanguage === 'ru' ? 'Спасибо! Мы свяжемся с вами в ближайшее время.' : 'Thank you! We will contact you shortly.');
+            bookingForm.reset();
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    // Обработка кнопки отправки (на случай если форма не submit)
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert(currentLanguage === 'ru' ? 'Спасибо! Мы свяжемся с вами в ближайшее время.' : 'Thank you! We will contact you shortly.');
+            if (bookingForm) bookingForm.reset();
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+}
+
+// 7. Инициализация языка
+function initLanguage() {
     const savedLanguage = localStorage.getItem('stratum-language');
     if (savedLanguage) {
         switchLanguage(savedLanguage);
     } else {
-        // Определяем язык браузера
         const browserLang = navigator.language || navigator.userLanguage;
         if (browserLang.startsWith('en')) {
             switchLanguage('en');
@@ -60,103 +216,19 @@ document.addEventListener('DOMContentLoaded', function() {
             switchLanguage(lang);
         });
     });
-    
-    // Анимация появления
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    function checkFade() {
-        fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.classList.add('visible');
-            }
-        });
-    }
-    
-    checkFade();
-    window.addEventListener('scroll', checkFade);
-});
+}
 
-// 2. Обработка кнопки "Открыть бутик"
+// ЗАПУСК ВСЕХ ФУНКЦИЙ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
 document.addEventListener('DOMContentLoaded', function() {
-    const discoverBtn = document.getElementById('discoverBtn');
+    console.log('DOM загружен, инициализация...');
     
-    if (discoverBtn) {
-        discoverBtn.addEventListener('click', function() {
-            const collectionsSection = document.getElementById('collections');
-            if (collectionsSection) {
-                collectionsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-});
-
-// 3. Эффект параллакса для hero секции
-document.addEventListener('DOMContentLoaded', function() {
-    const hero = document.querySelector('.hero');
-    const heroImage = document.querySelector('.hero-image');
+    initLanguage();
+    initFadeAnimation();
+    initDiscoverButton();
+    initParallax();
+    initSmoothScroll();
+    initTranslationFallback();
+    initBookingModal(); // Важно! Инициализация модального окна
     
-    if (hero && heroImage) {
-        window.addEventListener('scroll', function() {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition < hero.offsetHeight) {
-                heroImage.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-            }
-        });
-    }
-});
-
-// 4. Плавная прокрутка для всех ссылок с якорями
-document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    const header = document.querySelector('header');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href').substring(1);
-            if (targetId === '') return;
-            
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                const headerHeight = header ? header.offsetHeight : 0;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
-
-// 5. Добавляем data-атрибуты для элементов, которые должны переводиться
-// (Этот код запускается автоматически при загрузке страницы)
-document.addEventListener('DOMContentLoaded', function() {
-    // Для ссылок в навигации
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-        if (!link.hasAttribute('data-ru')) {
-            const text = link.textContent;
-            link.setAttribute('data-ru', text);
-            // Примерный перевод на английский
-            if (text === 'Коллекции') link.setAttribute('data-en', 'Collections');
-            if (text === 'Ателье') link.setAttribute('data-en', 'Atelier');
-        }
-    });
-    
-    // Для заголовков и текстов
-    const elements = document.querySelectorAll('h1 span, h2, h3, p, .btn-primary, .segment-card h3, .segment-card p, .footer-col h4, .footer-col a, .footer-col p, .footer-col li:not(:has(a))');
-    elements.forEach(el => {
-        if (!el.hasAttribute('data-ru') && el.textContent.trim() && !el.querySelector('a')) {
-            const text = el.textContent.trim();
-            el.setAttribute('data-ru', text);
-            // Здесь можно добавить логику для перевода, но проще уже в HTML все прописать
-        }
-    });
+    console.log('Все функции инициализированы');
 });

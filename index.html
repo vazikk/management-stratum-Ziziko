@@ -15,6 +15,7 @@
                 <ul>
                     <li><a href="#collections" data-ru="Коллекции" data-en="Collections">Коллекции</a></li>
                     <li><a href="#atelier" data-ru="Ателье" data-en="Atelier">Ателье</a></li>
+                    <li><button class="nav-book-btn" id="bookAppointmentBtn" data-ru="Записаться" data-en="Book">Записаться</button></li>
                 </ul>
             </nav>
             <div class="language-switcher">
@@ -250,5 +251,41 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Модальное окно записи -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">⚜</div>
+                <h2 data-ru="Запись в бутик" data-en="Boutique Appointment">Запись в бутик</h2>
+                <p data-ru="Заполните форму, и мы свяжемся с вами для подтверждения" data-en="Fill out the form and we will contact you to confirm">Заполните форму, и мы свяжемся с вами для подтверждения</p>
+            </div>
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label data-ru="Ваше имя" data-en="Your name">Ваше имя</label>
+                    <input type="text" id="userName" name="userName" placeholder="Александр" required>
+                </div>
+                <div class="form-group">
+                    <label data-ru="Телефон" data-en="Phone">Телефон</label>
+                    <input type="tel" id="userPhone" name="userPhone" placeholder="+375 29 123-45-67" required>
+                </div>
+                <div class="form-group">
+                    <label data-ru="Удобное время" data-en="Preferred time">Удобное время</label>
+                    <input type="text" id="userTime" name="userTime" placeholder="12:00 - 20:00" data-ru-placeholder="12:00 - 20:00" data-en-placeholder="12:00 - 20:00">
+                </div>
+                <div class="form-group">
+                    <label data-ru="Комментарий (необязательно)" data-en="Comment (optional)">Комментарий (необязательно)</label>
+                    <textarea id="userComment" name="userComment" rows="3" placeholder="Например: хочу посмотреть спортивные часы" data-ru-placeholder="Например: хочу посмотреть спортивные часы" data-en-placeholder="Example: I want to see sports watches"></textarea>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn" data-ru="Отправить заявку" data-en="Send request">Отправить заявку</button>
+                <p class="form-note" data-ru="Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных" data-en="By clicking the button, you agree to the privacy policy">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
 </body>
 </html>
